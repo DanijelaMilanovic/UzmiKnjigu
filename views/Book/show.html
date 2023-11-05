@@ -1,0 +1,100 @@
+{% extends "_global/cover_page.html" %}
+{% block naslov %}Knjiga{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ BASE }}assets/css/main.css" />
+<link rel="stylesheet" href="{{ BASE }}assets/css/article.css" />
+{% endblock %}
+
+{% block js %}
+<script src="{{BASE}}assets/js/addToCart.js"></script>
+{% endblock %}
+
+{% block embedded_js %}
+$(document).ready(function() {
+$('#navbarMain > ul > li:nth-child(1) > a').addClass('active');
+});
+{% endblock %}
+{% block profile %}
+{% if userId %}
+<div>
+    <div class="reg-text">
+            <span class="dropleft">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{userForename}} {{userSurname}}
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="/user/profile">Profil</a></li>
+                    <li><a class="dropdown-item" href="/user/addBook">Dodaj knjigu</a></li>
+                    <li><a class="dropdown-item" href="/user/logout">Odjavi se</a></li>
+                </ul>
+            </span>
+    </div>
+
+    <img src="{{ BASE }}assets/img/pocetniLogo0.png" class="img-fluid" />
+</div>
+{% else %}
+<div>
+    <div class="reg-text">
+        <a href="/user/register">Registrujte se</a>
+        /
+        <a href="/user/login">Prijavite se</a>
+
+        <img src="{{ BASE }}assets/img/avatar.png" class="image-avatar">
+    </div>
+
+    <img src="{{ BASE }}assets/img/pocetniLogo0.png" class="img-fluid" />
+</div>
+{% endif %}
+{% endblock %}
+{% block main %}
+  <main class="container-fluid" id="artikal">
+      <div class="row">
+        <div class="col-12">
+            <h2>{{book.title}} ({{book.state}} stanje)</h2>
+        </div>
+      </div>
+      <div class="row">
+          <div class="col-md-4 col-sm-12 col-xs-12">
+            <a href="{{ BASE }}assets/uploads/{{book.images[0]}}" data-toggle="lightbox" data-gallery="hidden-images">
+                <img src="{{ BASE }}assets/uploads/{{book.images[0]}}" class="img-fluid">
+            </a>
+              {% for image in book.images %}
+              {% if image != book.images[0] %}
+              <div data-toggle="lightbox" data-gallery="hidden-images" data-src="{{ BASE }}assets/uploads/{{image}}" data-title="{{image}}"></div>
+              {% endif %}
+              {% endfor %}
+          </div>
+          
+          <div class="col-md-3 col-sm-12 col-xs-12 move">
+            <div class="form-floating form-group">
+                <input type="text" class="form-control" id="polje1" placeholder="Izdavač" value="{{book.publisher}}" disabled>
+                <label class="input-label" for="polje1">Izdavač</label>
+            </div>
+            <div class="form-floating form-group">
+                <input type="text" class="form-control" id="polje2" placeholder="Autor" value="{{book.author}}" disabled>
+                <label class="input-label" for="polje2">Autor</label>
+            </div>
+            <div class="form-floating form-group">
+                <input type="text" class="form-control" id="polje3" placeholder="Kategorja" value="{{book.category}}" disabled>
+                <label class="input-label" for="polje3">Kategorja</label>
+            </div>
+            <div class="form-floating form-group">
+                <input type="text" class="form-control" id="polje4" placeholder="Cijena" value="{{book.price}} KM" disabled>
+                <label class="input-label" for="polje4">Cijena</label>
+            </div>
+          </div>
+          
+          <div class="col-md-1 col-sm-12 col-xs-12 line-box">
+            <span class="v-line"></span>
+          </div>
+          
+          <div class="col-md-3 col-sm-12 col-xs-12">
+            <button type="submit" class="btn btn-lg btn-signup" id="addToCart" onclick="addBookmark({{book.id}})">Dodaj u korpu</button>
+          </div>
+      </div>
+  </main>
+{% endblock %}
+{% block specific_scripts %}
+<script src="https://cdn.jsdelivr.net/npm/bs5-lightbox@1.8.0/dist/index.bundle.min.js"></script>
+{% endblock %}

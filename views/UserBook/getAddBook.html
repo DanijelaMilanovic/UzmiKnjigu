@@ -1,0 +1,103 @@
+{% extends "_global/index.html" %}
+{% block naslov %}Dodaj knjigu{% endblock %}
+
+{% block header %}
+<div>
+    <div class="reg-text">
+            <span class="dropleft">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{userForename}} {{userSurname}}
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="/user/profile">Profil</a></li>
+                    <li><a class="dropdown-item" href="/user/addBook">Dodaj knjigu</a></li>
+                    <li><a class="dropdown-item" href="/user/logout">Odjavi se</a></li>
+                </ul>
+            </span>
+    </div>
+
+    <img src="/assets/img/pocetniLogo0.png" class="img-fluid" />
+</div>
+{% endblock %}
+{% block main %}
+{% if message %}
+    <div class="alert alert-danger alert-dismissible m-3">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>Greška prilikom dodavanja knjige!</strong> {{ message }}
+    </div>
+{% endif %}
+    <div class="container-fluid bg-light border border-opacity-50">
+        <h3 class="text-center mt-3 mb-3">Dodaj knjigu</h3>
+        <form action="/user/addBook" method="post" class="d-block m-auto w-75" enctype="multipart/form-data" >
+            <div class="form-row mb-5">
+                <div class="col">
+                    <select class="form-select" name="category" id="categorySelect" aria-label="Kategorija">
+                        <option value="-1" selected disabled>Kategorija</option>
+                        {% for category in categories %}
+                        <option value="{{category.category_id}}">{{category.category_name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="form-row mb-sm-3">
+                <div class="col-lg-4 col-md-4 col-12 mb-4">
+                    <select class="form-select" name="title" id="titleSelect" aria-label="Default select example">
+                        <option value="-1" selected disabled>Naslov</option>
+                    </select>
+                </div>
+                <div class="col-lg-4 col-md-4 col-12 mb-4">
+                    <select class="form-select" name="publisher" aria-label="Default select example">
+                        <option value="-1" selected disabled>Izdavač</option>
+                        {% for publisher in publishers %}
+                        <option value="{{publisher.publisher_id}}">{{publisher.name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-lg-4 col-md-4 col-12 mb-4">
+                    <select class="form-select" name="author" aria-label="Default select example">
+                        <option value="-1" selected disabled>Autor</option>
+                        {% for author in authors %}
+                        <option value="{{author.author_id}}">{{author.first_name}} {{author.last_name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="form-row mb-4">
+                <div class="col-5 mb-4">
+                    <select class="form-select" name="state" aria-label="Default select example">
+                        <option value="-1" selected disabled>Stanje</option>
+                        {% for state in states %}
+                        <option value="{{state.state_id}}">{{state.state_name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-5 mb-4">
+                    <input type="number" class="form-control" name="price" min="0" max="100" step="0.1" placeholder="Cijena" style="padding: 0.375rem 0.75rem;"/>
+                </div>
+                <div class="col-2 mb-4 d-flex" style="font-size: 23px">
+                    KM
+                </div>
+            </div>
+            <div class="form-row mb-4">
+                <div class="col-3 mb-4">
+                    <input type="number" class="form-control" name="publishing_year" placeholder="Godina objavljivanja" style="padding: 0.375rem 0.75rem;"/>
+                </div>
+                <div class="col-3 mb-4">
+                    <input type="number" class="form-control" name="pages" placeholder="Broj stranica" style="padding: 0.375rem 0.75rem;"/>
+                </div>
+            </div>
+            <div class="form-row mb-4">
+                <div>
+                    <label for="pictures" class="form-label">Slike</label>
+                    <input class="form-control" type="file" name="pictures[]" id="pictures" accept="image/*" style="padding: 0.375rem 0.75rem;" multiple>
+                </div>
+            </div>
+            <div class="form-row mb-3">
+                    <button type="submit" class="btn btn-outline-secondary btn-lg w-100 m-auto">Dodaj knjigu</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+{% block scripts %}
+<script type="text/javascript" src="{{ BASE }}assets/js/newBookTitleApi.js"></script>
+{% endblock %}

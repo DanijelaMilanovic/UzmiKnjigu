@@ -1,0 +1,160 @@
+{% extends "_global/cover_page.html" %}
+{% block naslov %}Korpa{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ BASE }}assets/css/cart.css" />
+{% endblock %}
+
+{% block embedded_js %}
+$(document).ready(function() {
+$('#navbarMain > ul > li:nth-child(1) > a').addClass('active');
+});
+{% endblock %}
+{% block profile %}
+{% if userId %}
+<div>
+  <div class="reg-text">
+            <span class="dropleft">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{userForename}} {{userSurname}}
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="/user/profile">Profil</a></li>
+                    <li><a class="dropdown-item" href="/user/addBook">Dodaj knjigu</a></li>
+                    <li><a class="dropdown-item" href="/user/logout">Odjavi se</a></li>
+                </ul>
+            </span>
+  </div>
+
+  <img src="Assets/img/pocetniLogo0.png" class="img-fluid" />
+</div>
+{% else %}
+<div>
+  <div class="reg-text">
+    <a href="/user/register">Registrujte se</a>
+    /
+    <a href="/user/login">Prijavite se</a>
+
+    <img src="{{ BASE }}assets/img/avatar.png" class="image-avatar">
+  </div>
+
+  <img src="Assets/img/pocetniLogo0.png" class="img-fluid" />
+</div>
+{% endif %}
+{% endblock %}
+{% block main %}
+<section class="h-100 h-custom">
+  <div class="container h-100 py-5">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col">
+
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+            <tr>
+              <th scope="col" class="h5">Korpa</th>
+              <th scope="col">Stanje</th>
+              <th scope="col">Cijena</th>
+              <th scope="col">Ukloni</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for book in books %}
+            <tr>
+              <th scope="row">
+                <div class="d-flex align-items-center">
+                  <img id="boookImage" src="{{ BASE }}assets/uploads/{{book[0].image}}" class="img-fluid rounded-3"
+                       style="width: 120px;" alt="Book">
+                  <div class="flex-column ms-4">
+                    <h5 style="font-weight: bold" class="mb-2">{{book[0].title}}</h5>
+                    <p style="font-weight: lighter" class="mb-0">{{book[0].author}}</p>
+                  </div>
+                </div>
+              </th>
+              <td class="align-middle">
+                <p class="mb-0" style="font-weight: 500;">{{book[0].state}}</p>
+              </td>
+              <td class="align-middle">
+                <p class="mb-0" style="font-weight: 500;">{{book[0].price}} KM</p>
+              </td>
+              <td class="align-middle">
+                <div class="d-flex flex-row">
+                  <button type="button" class="btn btn-link"><span class="bi bi-trash" style="font-size:30px; color:#001479"></span></button>
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card shadow-2-strong mb-5 mb-lg-0" style="border-radius: 16px;">
+          <div class="card-body p-4">
+
+            <div class="row">
+              <div>
+                <form>
+                    <div class="row">
+                      <div class="col-12 col-xl-6">
+                        <div class="form-outline mb-4 mb-xl-5">
+                          <input type="text" id="firstLastName" class="form-control form-control-lg"/>
+                          <label class="form-label" for="firstLastName">Ime i prezime</label>
+                        </div>
+
+                        <div class="form-outline mb-4 mb-xl-5">
+                          <input type="text" id="shippingAddress" class="form-control form-control-lg"/>
+                          <label class="form-label" for="shippingAddress">Adresa</label>
+                        </div>
+                      </div>
+                      <div class="col-12 col-xl-6">
+                        <div class="form-outline mb-4 mb-xl-5">
+                          <input type="text" id="phoneNumber" class="form-control form-control-lg"/>
+                          <label class="form-label" for="phoneNumber">Broj telefona</label>
+                        </div>
+
+                        <div class="form-outline mb-4 mb-xl-5">
+                          <input type="text" id="note" class="form-control form-control-lg"/>
+                          <label class="form-label" for="note">Napomena</label>
+                        </div>
+                      </div>
+                    </div>
+                  <div class="col-lg-4 col-xl-3">
+                    <div class="d-flex justify-content-between" style="font-weight: 500;">
+                      <p class="mb-0">Cijena knjiga</p>
+                      <p class="mb-0">{{priceWithoutShipping}}.OO KM</p>
+                    </div>
+
+                    <div class="d-flex justify-content-between" style="font-weight: 500;">
+                      <p class="mb-0">Poštarina</p>
+                      <p class="mb-0">10.00 KM</p>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <div class="d-flex justify-content-between mb-4" style="font-weight: 500;">
+                      <p class="mb-2">Ukupno (sa poštarinom)</p>
+                      <p class="mb-2">{{priceWithShipping}}.00 KM</p>
+                    </div>
+
+                    <button type="button" class="btn btn-primary btn-block btn-lg" style="background-color:#001479">
+                      <div class="d-flex justify-content-between">
+                        <span>Potvrda</span>
+                      </div>
+                    </button>
+                  </div>
+
+                </form>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+

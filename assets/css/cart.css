@@ -1,0 +1,14 @@
+@media (min-width: 1025px) {
+    .h-custom {
+        height: 100vh !important;
+    }
+}
+
+footer {
+    margin-top: 37% !important;
+}
+
+#boookImage {
+    width: 50%;
+    height: 70%;
+}

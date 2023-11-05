@@ -1,0 +1,12 @@
+{% extends "Main/home.html" %}
+{% block embedded_js %}
+let books = JSON.parse('{{ books | json_encode | raw }}');
+$(document).ready(function() {
+$('#navbarMain > ul > li:nth-child(1) > a').addClass('active');
+});
+{% endblock %}
+{% block specific_scripts %}
+<script type="text/javascript" src="{{ BASE }}assets/js/sidenav.js"></script>
+<script type="text/javascript" src="{{ BASE }}assets/js/listBooksSearch.js"></script>
+<script type="text/javascript" src="{{ BASE }}assets/js/slider.js"></script>
+{% endblock %}

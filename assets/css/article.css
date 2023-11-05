@@ -1,0 +1,36 @@
+#artikal {
+    height: 50vh;
+    margin-top: 2%;
+}
+#artikal img {
+    height: 30vh;
+    width: 75%;
+    border: 3px solid rgba(128, 126, 126, 0.625);
+    transition: .5s ease;
+}
+#artikal img:hover {
+    transform: scale(1.05);
+}
+#artikal .form-group {
+    margin-top: 2%;
+}
+#artikal .form-group:nth-last-child(1) {
+    width: 33%;
+    float: right;
+}
+#artikal .form-group:first-child(0) {
+    margin-top: 4%;
+}
+
+.move {
+    margin-left: 5%;
+}
+
+@media only screen and (max-width: 767px) {
+    #artikal {
+        text-align: center;
+    }
+    footer {
+        margin-top: 85%;
+    }
+}

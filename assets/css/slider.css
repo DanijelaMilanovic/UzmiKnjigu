@@ -1,0 +1,75 @@
+.slidecontainer {
+  width: 100%; /* Width of the outside container */
+}
+
+/* The slider itself */
+.slider {
+  margin-top: 1rem;
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  width: 100%; /* Full-width */
+  height: 25px; /* Specified height */
+  background: #d3d3d3; /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 10px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #001479; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+.price-range {
+ display: flex;
+}
+
+.price-range label {
+  display: block;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.sum-price {
+  display: flex;
+  color: #001479;
+}
+.sum-price label{
+
+  margin-top: 1rem;
+  font-size: 20px;
+  color: #001479;
+}
+.price-range label:first-child {
+  text-align: left;
+}
+.price-range label:last-child {
+  text-align: right;
+}
+#demo {
+  margin-right: -80px;
+}
+
+.slider::-moz-range-thumb {
+  width: 10px; /* Set a specific slider handle width */
+  height: 20px; /* Slider handle height */
+  background: #001479; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+.button-filter-search {
+  background-color: #001479;
+  color: white;
+  margin-top: 1rem;
+  height: 3rem;
+}
