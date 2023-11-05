@@ -1,6 +1,6 @@
 # UzmiKnjigu
 
-The project "UzmiKnjigu" was developed as a part of the "Internet Technologies and Programming" course during the fourth year at the Faculty of Electrical Engineering in East Sarajevo.
+The "UzmiKnjigu" project is a platform designed for the buying and selling of educational books. It was developed as a part of the "Internet Technologies and Programming" course during the fourth year at the Faculty of Electrical Engineering in East Sarajevo.
 
 ## Key Features
 
